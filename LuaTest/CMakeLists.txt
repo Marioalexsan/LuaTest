@@ -13,3 +13,4 @@ endif()
 
 target_compile_definitions(LuaTest PRIVATE -DLUA_BUILD_AS_DLL)
 target_link_libraries(LuaTest PRIVATE Lua)
+target_link_libraries(LuaTest PRIVATE SFML::Graphics SFML::Audio SFML::System)
