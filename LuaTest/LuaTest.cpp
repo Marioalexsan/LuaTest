@@ -17,12 +17,27 @@ do {                                                    \
     }                                                   \
 } while (false);
 
+extern "C" {
+    static int custom_func(lua_State* L) {
+        double d = lua_tonumber(L, 1);
+        std::cout << "Custom func called with " << d << std::endl;
+        return 0;
+    }
+}
+
 class Engine {
     lua_State* L;
+
+    void loadEngineFunctions() {
+        lua_pushcfunction(L, custom_func);
+        lua_setglobal(L, "customFunc");
+    }
 public:
     Engine() {
         L = luaL_newstate();
         luaL_openlibs(L);
+
+        loadEngineFunctions();
     }
 
     ~Engine() {
