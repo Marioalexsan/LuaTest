@@ -144,10 +144,13 @@ int main()
 {
     engine = std::make_unique<Engine>();
 
-    std::ifstream script("script.lua");
+    // std::ifstream script("script.lua");
+    std::ifstream script("script.out", std::istream::binary);
 
     std::ostringstream sstr;
     sstr << script.rdbuf();
+
+    std::cout << sstr.str() << std::endl;
 
     engine->loadScript(sstr.str(), "script1");
 
